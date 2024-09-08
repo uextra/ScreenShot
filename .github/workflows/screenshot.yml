@@ -1,0 +1,75 @@
+name: ScreenShot
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+  schedule:
+  - cron: "37 */12 * * *"
+
+jobs:
+  screenshot:
+    name: Screenshot
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+          fetch-depth: 2
+    
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install Deps
+      run: |
+        npm i yarn --location=global
+        npm i puppeteer
+
+    - name: Add Chinese Support # 添加中文语言支持
+      run: |
+        git remote -v  # 查看信息
+        git pull origin master  # 防止冲突(一般不会)
+        curl cip.cc  # 查看信息
+        sudo apt-get install language-pack-zh-han*
+        sudo apt-get install ttf-mscorefonts-installer
+        sudo apt-get install fontconfig
+        LANG="zh_CN.UTF-8"
+        locale
+        echo $LANG
+        fc-list :lang=zh
+        cp HarmonyOS.ttf /usr/share/fonts/
+        sudo chmod 644 /usr/share/fonts/HarmonyOS.ttf
+        sudo mkfontscale
+        sudo mkfontdir
+        sudo fc-cache -fv
+        rm -rf fonts.*
+
+    - name: Capture Screenshot
+      id: capture
+      run: |
+        node index.js
+
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+
+    - uses: actions/cache@v3
+      id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+      with:
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'docs: Update ScreenShots [skip ci]'
+        branch: master
+        commit_user_name: ShellC0de
+        commit_user_email: 3356136957@qq.com
+        commit_author: HelloTools-Bot <3356136957@qq.com>
