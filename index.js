@@ -26,8 +26,8 @@ async function snap(url, id) {
         headless: 'new',
         // 设置浏览器窗口大小
         defaultViewport: {
-          width: 1024,
-          height: 655,
+          width: 1920,
+          height: 1080,
         }
       });
 
