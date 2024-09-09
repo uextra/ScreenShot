@@ -8,7 +8,7 @@ on:
     branches:
     - master
   schedule:
-  - cron: "37 */1 * * *"
+  - cron: "37 * * * *"
 permissions: 
   actions: write
   contents: write
@@ -29,7 +29,6 @@ jobs:
 
     - name: Install Deps
       run: |
-        npm i yarn --location=global
         npm i puppeteer
 
     - name: Add Chinese Support # 添加中文语言支持
@@ -74,6 +73,6 @@ jobs:
       with:
         commit_message: 'docs: Update ScreenShots [skip ci]'
         branch: master
-        commit_user_name: ShellC0de
+        commit_user_name: HelloTools-Bot
         commit_user_email: 3356136957@qq.com
         commit_author: HelloTools-Bot <3356136957@qq.com>
