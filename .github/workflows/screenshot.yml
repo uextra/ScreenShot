@@ -9,8 +9,10 @@ on:
     - master
   schedule:
   - cron: "37 */1 * * *"
-permissions: write
-
+permissions: 
+  actions: write
+  contents: write
+  
 jobs:
   screenshot:
     name: Screenshot
