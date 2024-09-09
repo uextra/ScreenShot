@@ -81,9 +81,7 @@ snap('https://top.baidu.com/board?tab=realtime', 'baidu-top');
 snap('https://news.google.com/home?hl=en-US&gl=US&ceid=US%3Aen&v2prv=1', 'google-news-us');
 // Google News - CN
 snap('https://news.google.com/home?hl=zh-CN&gl=CN&ceid=CN:zh-Hans&v2prv=1', 'google-news-cn');
-// 朽丘博
-snap('https://koxiuqiu.cn/', 'koxiuqiu');
-// wling 秘密基地
-snap('https://blog.tblstudio.cn/', 'wling');
 // Thun888
 snap('https://blog.hzchu.top/', 'thun888');
+snap('https://github.com/cc2007/ZuiGaoZhiShi/blob/main/yulu.dat', 'yulu');
+snap('https://www.bitiful.com/', 'bitful');
